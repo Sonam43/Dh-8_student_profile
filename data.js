@@ -831,7 +831,7 @@ const studentData = [
         floor: 3,
         image: "thinley dorji.jpg",
         roomNumber: "316",
-        year: 1,
+        year: 2,
         semester: "Fall Semester",
         course: "BSc DSDA",
         Government_type: "Private",
@@ -863,7 +863,7 @@ const studentData = [
         floor: 2,
         image: "lham.jpg",
         roomNumber: "216",
-        year: 1,
+        year: 2,
         semester: "1st semester",
         course: "BSc EPS",
         Government_type: "Government",
@@ -878,4 +878,5 @@ if (typeof module !== 'undefined' && module.exports) {
 } else {
     // For browser environments
     window.studentData = studentData;
+
 }
