@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DH 8 Hostel </title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-image: url('DH8.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            padding: 20px;
+            position: relative;
+        }
+        
+        /* Add overlay to make text more readable */
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: -1;
+        }
+        
+        .container {
+            background-color: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(12px);
+            border-radius: 18px;
+            box-shadow: 0 18px 48px rgba(0, 0, 0, 0.22);
+            padding: 48px 40px;
+            text-align: center;
+            max-width: 920px;
+            width: 100%;
+            position: relative;
+            z-index: 1;
+            border: 1px solid rgba(255,255,255,0.6);
+        }
+        
+        h1 {
+            font-size: 2.75rem;
+            margin-bottom: 10px;
+            color: #0f172a;
+            letter-spacing: 0.3px;
+        }
+        
+        h1 span {
+            color: #4361ee;
+        }
+        
+        p {
+            color: #334155;
+            margin-bottom: 28px;
+            line-height: 1.7;
+            font-size: 1.02rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #4361ee, #7209b7);
+            color: white;
+            padding: 12px 26px;
+            border-radius: 999px;
+            text-decoration: none;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+            margin-top: 20px;
+            box-shadow: 0 10px 20px rgba(67, 97, 238, 0.25);
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 14px 28px rgba(67, 97, 238, 0.32);
+            filter: brightness(1.03);
+        }
+        
+        .logo {
+            font-size: 3rem;
+            margin-bottom: 22px;
+            color: #4361ee;
+        }
+
+        /* Additional styling for the background image info */
+        .background-info {
+            margin-top: 36px;
+            padding: 22px;
+            border-radius: 14px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border: 1px solid rgba(0,0,0,0.06);
+        }
+
+        .background-info h2 {
+            margin-bottom: 15px;
+            color: #1a1a2e;
+        }
+
+        .background-info p {
+            color: #333;
+            font-size: 0.95rem;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        /* Leaders section */
+        .leaders-wrapper {
+            margin-top: 35px;
+            text-align: center;
+        }
+
+        .leaders-wrapper h2 {
+            color: #0f172a;
+            margin-bottom: 18px;
+            letter-spacing: 0.2px;
+        }
+
+        .leaders {
+            display: flex;
+            justify-content: center;
+            gap: 22px;
+            flex-wrap: wrap;
+        }
+
+        .leader-card {
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(6px);
+            border-radius: 14px;
+            box-shadow: 0 10px 28px rgba(0, 0, 0, 0.16);
+            padding: 16px;
+            width: 270px;
+            text-align: left;
+            border: 1px solid rgba(0,0,0,0.06);
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .leader-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 16px 36px rgba(0,0,0,0.2);
+        }
+
+        .leader-card img {
+            width: 100%;
+            height: 230px;
+            object-fit: cover;
+            border-radius: 12px;
+        }
+
+        .leader-card h3 {
+            margin-top: 10px;
+            color: #0f172a;
+            font-size: 1.08rem;
+            font-weight: 700;
+        }
+
+        .leader-card .role {
+            color: #3b82f6;
+            font-weight: 600;
+            font-size: 0.92rem;
+            display: inline-block;
+            background: rgba(59,130,246,0.08);
+            border: 1px solid rgba(59,130,246,0.25);
+            padding: 4px 10px;
+            border-radius: 999px;
+            margin-top: 6px;
+        }
+
+        .leader-card .phone {
+            color: #334155;
+            font-size: 0.95rem;
+            margin-top: 8px;
+        }
+
+        @media (max-width: 640px) {
+            h1 { font-size: 2.1rem; }
+            .container { padding: 28px 20px; }
+            .leader-card { width: 100%; }
+            .leader-card img { height: 200px; }
+        }
+
+        /* Lightbox */
+        .lightbox-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.85);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            padding: 16px;
+        }
+
+        .lightbox-overlay.active {
+            display: flex;
+        }
+
+        .lightbox-content {
+            position: relative;
+            max-width: 95vw;
+            max-height: 90vh;
+        }
+
+        .lightbox-img {
+            max-width: 95vw;
+            max-height: 90vh;
+            width: auto;
+            height: auto;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background: #ffffff;
+            color: #1a1a2e;
+            border: none;
+            border-radius: 999px;
+            width: 36px;
+            height: 36px;
+            cursor: pointer;
+            font-size: 18px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">
+            <i class="fas fa-building"></i>
+        </div>
+        <h1>DH 8<span>Hostel</span></h1>
+        <p>Welcome to the DH 8 Hostel. We've created a beautiful and functional student profile system for managing 54 students with all their details.</p>
+        
+        <div class="buttons">
+            <a href="student-profile.html" class="btn">View Student Profile</a>
+        </div>
+
+        <div class="leaders-wrapper">
+            <h2>Hostel Leaders</h2>
+            <div class="leaders">
+                <div class="leader-card">
+                    <img src="image/lila.jpg" alt="Leader 1">
+                    <h3>Lilla Dhar Dungana</h3>
+                    <div class="role">Resident leader</div>
+                    <div class="phone">Phone: +975 77407228</div>
+                </div>
+                <div class="leader-card">
+                    <img src="image/sonam dorji.jpg" alt="Leader 2">
+                    <h3>Sonam Dorji</h3>
+                    <div class="role">Resident leader</div>
+                    <div class="phone">Phone: +975 1798278</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="background-info">
+            <h2>DH 8 </h2>
+            <p>Our hostel have 3 floor which include 54 students</p>
+        </div>
+    </div>
+
+    <!-- Lightbox Modal -->
+    <div class="lightbox-overlay" id="lightbox" aria-hidden="true">
+        <div class="lightbox-content">
+            <button class="lightbox-close" id="lightboxClose" aria-label="Close">&times;</button>
+            <img class="lightbox-img" id="lightboxImg" src="" alt="Full view">
+        </div>
+    </div>
+
+    <!-- Lightbox Script -->
+    <script>
+        (function() {
+            var overlay = document.getElementById('lightbox');
+            var overlayImg = document.getElementById('lightboxImg');
+            var closeBtn = document.getElementById('lightboxClose');
+
+            function openLightbox(src, alt) {
+                overlayImg.src = src;
+                overlayImg.alt = alt || 'Full view';
+                overlay.classList.add('active');
+                overlay.setAttribute('aria-hidden', 'false');
+                document.body.style.overflow = 'hidden';
+            }
+
+            function closeLightbox() {
+                overlay.classList.remove('active');
+                overlay.setAttribute('aria-hidden', 'true');
+                overlayImg.src = '';
+                document.body.style.overflow = '';
+            }
+
+            document.querySelectorAll('.leader-card img').forEach(function(img) {
+                img.style.cursor = 'zoom-in';
+                img.addEventListener('click', function() {
+                    openLightbox(img.getAttribute('src'), img.getAttribute('alt'));
+                });
+            });
+
+            overlay.addEventListener('click', function(e) {
+                if (e.target === overlay) {
+                    closeLightbox();
+                }
+            });
+            closeBtn.addEventListener('click', closeLightbox);
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    closeLightbox();
+                }
+            });
+        })();
+    </script>
+</body>
+</html>

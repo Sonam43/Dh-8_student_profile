@@ -1,0 +1,1240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Profile | Elite Hostel</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #4361ee;
+            --secondary-color: #7209b7;
+            --accent-color: #f72585;
+            --light-color: #f8f9fa;
+            --dark-color: #1a1a2e;
+            --success-color: #4caf50;
+            --warning-color: #ff9800;
+            --danger-color: #f44336;
+            --info-color: #2196f3;
+            --gray-color: #6c757d;
+            --border-radius: 10px;
+            --box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f5f7ff;
+            color: var(--dark-color);
+            transition: var(--transition);
+        }
+
+        body.dark-mode {
+            background-color: #121212;
+            color: #f5f7ff;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 24px 0;
+            position: relative;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="white" opacity="0.1"/><circle cx="75" cy="75" r="1" fill="white" opacity="0.1"/><circle cx="50" cy="10" r="0.5" fill="white" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+            pointer-events: none;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.6rem;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+        }
+
+        .logo i {
+            font-size: 2rem;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .theme-toggle {
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(10px);
+        }
+
+        .theme-toggle:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: scale(1.05);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+
+        .back-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 10px 18px;
+            border-radius: 999px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            text-decoration: none;
+            font-weight: 600;
+            backdrop-filter: blur(10px);
+        }
+
+        .back-btn:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+
+        /* Search Bar */
+        .search-container {
+            background: white;
+            border-radius: 16px;
+            padding: 24px;
+            margin: 24px 0;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+            border: 1px solid rgba(0,0,0,0.04);
+        }
+
+        .dark-mode .search-container {
+            background: #1e1e1e;
+        }
+
+        .search-form {
+            display: flex;
+            gap: 10px;
+        }
+
+        .search-input {
+            flex: 1;
+            padding: 14px 18px;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            background: #f9fafb;
+        }
+
+        .dark-mode .search-input {
+            background: #2a2a2a;
+            border: 1px solid #444;
+            color: white;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.15);
+            background: white;
+        }
+
+        .search-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 14px 22px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+        }
+
+        .search-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 16px rgba(102, 126, 234, 0.4);
+        }
+
+        /* Floor Tabs */
+        .floor-tabs {
+            display: flex;
+            gap: 12px;
+            margin: 24px 0;
+            overflow-x: auto;
+            padding-bottom: 8px;
+        }
+
+        .floor-tab {
+            background: white;
+            border: 1px solid #e5e7eb;
+            padding: 12px 24px;
+            border-radius: 999px;
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+            white-space: nowrap;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .dark-mode .floor-tab {
+            background: #1e1e1e;
+            color: white;
+        }
+
+        .floor-tab.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-color: transparent;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+        }
+
+        .floor-tab:hover:not(.active) {
+            background: #f8fafc;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .dark-mode .floor-tab:hover:not(.active) {
+            background: #2a2a2a;
+        }
+
+        /* Student Cards */
+        .floor-content {
+            display: none;
+        }
+
+        .floor-content.active {
+            display: block;
+            animation: fadeIn 0.5s ease forwards;
+        }
+
+        .cards-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .student-card {
+            background: white;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+            position: relative;
+            border: 1px solid rgba(0,0,0,0.04);
+        }
+
+        .dark-mode .student-card {
+            background: #1e1e1e;
+        }
+
+        .student-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 18px 36px rgba(0, 0, 0, 0.16);
+        }
+
+        .card-header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            padding: 28px 20px 20px 20px;
+            text-align: center;
+            position: relative;
+        }
+
+        .student-image {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            border: 5px solid white;
+            overflow: hidden;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+            box-shadow: var(--box-shadow);
+        }
+
+        .student-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .card-body {
+            padding: 20px;
+        }
+
+        .student-name {
+            font-size: 1.15rem;
+            font-weight: 700;
+            margin-bottom: 6px;
+            text-align: center;
+            color: #1f2937;
+        }
+
+        .student-id {
+            color: #6b7280;
+            margin-bottom: 12px;
+            text-align: center;
+            font-size: 0.85rem;
+        }
+
+        /* Pills */
+        .pill {
+            display: inline-flex;
+            align-items: center;
+            padding: 6px 10px;
+            border-radius: 999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.2px;
+            border: 1px solid rgba(0,0,0,0.06);
+            background: #f9fafb;
+            color: #374151;
+        }
+
+        .pill-course {
+            background: rgba(67,97,238,0.08);
+            color: #2a36a6;
+            border-color: rgba(67,97,238,0.22);
+        }
+
+        .student-info {
+            list-style: none;
+        }
+
+        .info-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .info-item i {
+            width: 20px;
+            color: var(--primary-color);
+            margin-right: 10px;
+        }
+
+        .info-label {
+            font-size: 0.8rem;
+            color: var(--gray-color);
+            margin-right: 5px;
+        }
+
+        /* Card Actions */
+        .card-actions {
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 1px solid #e9ecef;
+        }
+
+        .view-more-btn {
+            width: 100%;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-size: 0.9rem;
+        }
+
+        .view-more-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(67, 97, 238, 0.3);
+        }
+
+        .view-more-btn i {
+            font-size: 1rem;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark-color);
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        /* Lightbox */
+        .lightbox-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.85);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 10001;
+            padding: 16px;
+        }
+
+        .lightbox-overlay.active {
+            display: flex;
+        }
+
+        .lightbox-content {
+            position: relative;
+            max-width: 95vw;
+            max-height: 90vh;
+        }
+
+        .lightbox-img {
+            max-width: 95vw;
+            max-height: 90vh;
+            width: auto;
+            height: auto;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background: #ffffff;
+            color: #1a1a2e;
+            border: none;
+            border-radius: 999px;
+            width: 36px;
+            height: 36px;
+            cursor: pointer;
+            font-size: 18px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .cards-container {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            }
+
+            .header-container {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .header-actions {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .search-form {
+                flex-direction: column;
+            }
+        }
+
+        /* Preloader */
+        #preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #4361ee, #7209b7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
+            
+        .loader {
+            width: 50px;
+            height: 50px;
+            border: 5px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+        }
+            
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* No Results */
+        .no-results {
+            text-align: center;
+            padding: 40px 0;
+            color: var(--gray-color);
+        }
+
+        .no-results i {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            opacity: 0.5;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 10000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 5% auto;
+            padding: 0;
+            border-radius: var(--border-radius);
+            width: 90%;
+            max-width: 800px;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            animation: slideIn 0.3s ease;
+        }
+
+        .dark-mode .modal-content {
+            background-color: #1e1e1e;
+            color: #f5f7ff;
+        }
+
+        .modal-header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 20px 30px;
+            border-radius: var(--border-radius) var(--border-radius) 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-header h2 {
+            margin: 0;
+            font-size: 1.5rem;
+        }
+
+        .close-modal {
+            color: white;
+            font-size: 2rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .close-modal:hover {
+            opacity: 0.7;
+        }
+
+        .modal-body {
+            padding: 32px;
+            display: flex;
+            gap: 32px;
+        }
+
+        .modal-student-image {
+            flex-shrink: 0;
+        }
+
+        .modal-student-image img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 5px solid var(--primary-color);
+            box-shadow: var(--box-shadow);
+        }
+
+        .modal-student-info {
+            flex: 1;
+        }
+
+        .info-section {
+            margin-bottom: 25px;
+        }
+
+        .info-section h3 {
+            color: var(--primary-color);
+            margin-bottom: 14px;
+            font-size: 1.05rem;
+            border-bottom: 1px dashed rgba(67,97,238,0.5);
+            padding-bottom: 6px;
+            letter-spacing: 0.2px;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .modal-body .info-item {
+            display: flex;
+            align-items: center;
+            padding: 12px;
+            background: #f9fafb;
+            border-radius: 10px;
+            transition: var(--transition);
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .dark-mode .modal-body .info-item {
+            background: #2a2a2a;
+        }
+
+        .modal-body .info-item:hover {
+            background: #eef2ff;
+            transform: translateX(3px);
+        }
+
+        .dark-mode .modal-body .info-item:hover {
+            background: #3a3a3a;
+        }
+
+        .modal-body .info-item i {
+            width: 20px;
+            color: var(--primary-color);
+            margin-right: 10px;
+        }
+
+        .modal-body .info-label {
+            font-weight: 600;
+            color: var(--gray-color);
+            margin-right: 8px;
+            min-width: 120px;
+        }
+
+        .modal-footer {
+            padding: 20px 30px;
+            background: #f8f9fa;
+            border-radius: 0 0 var(--border-radius) var(--border-radius);
+            display: flex;
+            gap: 15px;
+            justify-content: flex-end;
+        }
+
+        .dark-mode .modal-footer {
+            background: #2a2a2a;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #3a56d4;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: var(--gray-color);
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #5a6268;
+            transform: translateY(-2px);
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Make student cards clickable */
+        .student-card {
+            cursor: pointer;
+        }
+
+        .student-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Responsive modal */
+        @media (max-width: 768px) {
+            .modal-content {
+                width: 95%;
+                margin: 10% auto;
+            }
+
+            .modal-body {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .modal-student-image img {
+                width: 120px;
+                height: 120px;
+            }
+
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .modal-footer {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="loader"></div>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <i class="fas fa-building"></i>
+                <span>DH 8 Hostel</span>
+            </div>
+            <div class="header-actions">
+                <button class="theme-toggle" id="theme-toggle">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <a href="index.html" class="back-btn">
+                    <i class="fas fa-arrow-left"></i>
+                    <span>Back to Home</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <div class="container">
+            <!-- Search Bar -->
+            <div class="search-container">
+                <form class="search-form" id="search-form">
+                    <input type="text" class="search-input" id="search-input" placeholder="Search by name or index number...">
+                    <button type="submit" class="search-btn">
+                        <i class="fas fa-search"></i>
+                        <span>Search</span>
+                    </button>
+                </form>
+            </div>
+
+            <!-- Floor Tabs -->
+            <div class="floor-tabs">
+                <button class="floor-tab active" data-floor="floor1">Floor 1</button>
+                <button class="floor-tab" data-floor="floor2">Floor 2</button>
+                <button class="floor-tab" data-floor="floor3">Floor 3</button>
+                <button class="floor-tab" data-floor="all">All Students</button>
+            </div>
+
+            <!-- Floor Content -->
+            <div class="floor-content active" id="floor1">
+                <h2>Floor 1 Students</h2>
+                <div class="cards-container" id="floor1-cards">
+                    <!-- Cards will be generated by JavaScript -->
+                </div>
+            </div>
+
+            <div class="floor-content" id="floor2">
+                <h2>Floor 2 Students</h2>
+                <div class="cards-container" id="floor2-cards">
+                    <!-- Cards will be generated by JavaScript -->
+                </div>
+            </div>
+
+            <div class="floor-content" id="floor3">
+                <h2>Floor 3 Students</h2>
+                <div class="cards-container" id="floor3-cards">
+                    <!-- Cards will be generated by JavaScript -->
+                </div>
+            </div>
+
+            <div class="floor-content" id="all">
+                <h2>All Students</h2>
+                <div class="cards-container" id="all-cards">
+                    <!-- Cards will be generated by JavaScript -->
+                </div>
+            </div>
+
+            <!-- No Results -->
+            <div class="no-results" id="no-results" style="display: none;">
+                <i class="fas fa-search"></i>
+                <h3>No students found</h3>
+                <p>Try a different search term</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Lightbox Modal -->
+    <div class="lightbox-overlay" id="lightbox" aria-hidden="true">
+        <div class="lightbox-content">
+            <button class="lightbox-close" id="lightboxClose" aria-label="Close">&times;</button>
+            <img class="lightbox-img" id="lightboxImg" src="" alt="Full view">
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; DH 8 hostel. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Student Details Modal -->
+    <div id="student-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modal-student-name">Student Details</h2>
+                <span class="close-modal">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="modal-student-image">
+                    <img id="modal-student-image" src="" alt="Student">
+                </div>
+                <div class="modal-student-info">
+                    <div class="info-section">
+                        <h3>Student Information</h3>
+                        <div class="info-grid">
+                            <div class="info-item">
+                                <i class="fas fa-id-card"></i>
+                                <span class="info-label">Student ID:</span>
+                                <span id="modal-student-id"></span>
+                            </div>
+                            <div class="info-item">
+                                <i class="fas fa-user"></i>
+                                <span class="info-label">Name:</span>
+                                <span id="modal-student-name-display"></span>
+                            </div>
+                            <div class="info-item">
+                                <i class="fas fa-hashtag"></i>
+                                <span class="info-label">Student Number:</span>
+                                <span id="modal-student-number"></span>
+                            </div>
+                            <div class="info-item">
+                                <i class="fas fa-phone"></i>
+                                <span class="info-label">Phone Number:</span>
+                                <span id="modal-phone"></span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="info-section">
+                        <h3>Academic Details</h3>
+                        <div class="info-grid">
+                            <div class="info-item">
+                                <i class="fas fa-graduation-cap"></i>
+                                <span class="info-label">Year:</span>
+                                <span id="modal-year"></span>
+                            </div>
+                            <div class="info-item">
+                                <i class="fas fa-book"></i>
+                                <span class="info-label">Semester:</span>
+                                <span id="modal-semester"></span>
+                            </div>
+                            <div class="info-item">
+                                <i class="fas fa-university"></i>
+                                <span class="info-label">Course:</span>
+                                <span id="modal-course"></span>
+                            </div>
+                            <div class="info-item">
+                                <i class="fas fa-tint"></i>
+                                <span class="info-label">Blood Type:</span>
+                                <span id="modal-blood-type"></span>
+                            </div>
+                            <div class="info-item">
+                                <i class="fas fa-award"></i>
+                                <span class="info-label">Scholar Type:</span>
+                                <span id="modal-scholar-type"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="info-section">
+                        <h3>Health & Contact</h3>
+                        <div class="info-grid">
+                            <div class="info-item">
+                                <i class="fas fa-heartbeat"></i>
+                                <span class="info-label">Health Issue:</span>
+                                <span id="modal-health-issue"></span>
+                            </div>
+                            <div class="info-item">
+                                <i class="fas fa-user-friends"></i>
+                                <span class="info-label">Parent's Phone:</span>
+                                <span id="modal-parent-phone"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeModal()">
+                    <i class="fas fa-times"></i> Close
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Include data.js file -->
+    <script src="data.js"></script>
+    
+    <script>
+        // DOM Elements
+        const preloader = document.getElementById('preloader');
+        const themeToggle = document.getElementById('theme-toggle');
+        const floorTabs = document.querySelectorAll('.floor-tab');
+        const floorContents = document.querySelectorAll('.floor-content');
+        const searchForm = document.getElementById('search-form');
+        const searchInput = document.getElementById('search-input');
+        const noResults = document.getElementById('no-results');
+        // Lightbox elements
+        const lbOverlay = document.getElementById('lightbox');
+        const lbImg = document.getElementById('lightboxImg');
+        const lbClose = document.getElementById('lightboxClose');
+
+        // Preloader
+        window.addEventListener('load', function() {
+            setTimeout(() => {
+                preloader.style.opacity = '0';
+                setTimeout(() => {
+                    preloader.style.display = 'none';
+                }, 500);
+            }, 1000);
+        });
+
+        // Theme Toggle
+        const body = document.body;
+        const icon = themeToggle.querySelector('i');
+
+        // Check for saved theme preference
+        if (localStorage.getItem('dark-mode') === 'true') {
+            body.classList.add('dark-mode');
+            icon.classList.replace('fa-moon', 'fa-sun');
+        }
+
+        themeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            
+            if (body.classList.contains('dark-mode')) {
+                icon.classList.replace('fa-moon', 'fa-sun');
+                localStorage.setItem('dark-mode', 'true');
+            } else {
+                icon.classList.replace('fa-sun', 'fa-moon');
+                localStorage.setItem('dark-mode', 'false');
+            }
+        });
+
+        // Floor Tabs
+        floorTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Remove active class from all tabs
+                floorTabs.forEach(t => t.classList.remove('active'));
+                
+                // Add active class to clicked tab
+                tab.classList.add('active');
+                
+                // Show corresponding floor content
+                const floor = tab.getAttribute('data-floor');
+                floorContents.forEach(content => {
+                    content.classList.remove('active');
+                    if (content.id === floor) {
+                        content.classList.add('active');
+                    }
+                });
+            });
+        });
+
+        // Use student data from data.js file
+        // studentData is loaded from data.js
+
+        // Create Student Card
+        const createStudentCard = (student) => {
+            const card = document.createElement('div');
+            card.className = 'student-card';
+            card.innerHTML = `
+                <div class="card-header">
+                    <div class="student-image">
+                        <img src="${student.image}" alt="${student.name}">
+                    </div>
+                </div>
+                <div class="card-body">
+                    <h3 class="student-name">${student.name}</h3>
+                    <p class="student-id">${student.indexNumber}</p>
+                    ${student.course ? `<div style="display:flex; justify-content:center; margin-bottom:12px;"><span class="pill pill-course">${student.course}</span></div>` : ''}
+                    <ul class="student-info">
+                        <li class="info-item">
+                            <i class="fas fa-graduation-cap"></i>
+                            <span class="info-label">Year:</span>
+                            <span>Year ${student.year || 'N/A'}</span>
+                        </li>
+                        <li class="info-item">
+                            <i class="fas fa-award"></i>
+                            <span class="info-label">Scholar:</span>
+                            <span>${student.Government_type || 'N/A'}</span>
+                        </li>
+                        <li class="info-item">
+                            <i class="fas fa-phone"></i>
+                            <span class="info-label">Phone:</span>
+                            <span>${student.phone}</span>
+                        </li>
+                    </ul>
+                    <div class="card-actions">
+                        <button class="view-more-btn" onclick="event.stopPropagation(); openStudentModal(${JSON.stringify(student).replace(/"/g, '&quot;')})">
+                            <i class="fas fa-eye"></i>
+                            View More Details
+                        </button>
+                    </div>
+                </div>
+            `;
+            
+            return card;
+        };
+
+        // Populate Student Cards
+        const populateStudentCards = (students) => {
+            // Clear existing cards
+            document.getElementById('floor1-cards').innerHTML = '';
+            document.getElementById('floor2-cards').innerHTML = '';
+            document.getElementById('floor3-cards').innerHTML = '';
+            document.getElementById('all-cards').innerHTML = '';
+            
+            // Filter and populate by floor
+            students.forEach(student => {
+                const card = createStudentCard(student);
+                
+                // Add to specific floor
+                document.getElementById(`floor${student.floor}-cards`).appendChild(card.cloneNode(true));
+                
+                // Add to all students
+                document.getElementById('all-cards').appendChild(card);
+            });
+            
+            // Show/hide no results message
+            if (students.length === 0) {
+                noResults.style.display = 'block';
+            } else {
+                noResults.style.display = 'none';
+            }
+
+            // Reattach lightbox handlers for new images
+            attachLightboxListeners();
+        };
+
+        // Search Functionality
+        searchForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const searchTerm = searchInput.value.toLowerCase().trim();
+            
+            if (searchTerm === '') {
+                populateStudentCards(students);
+                return;
+            }
+            
+            const filteredStudents = students.filter(student => 
+                student.name.toLowerCase().includes(searchTerm) || 
+                student.indexNumber.toLowerCase().includes(searchTerm)
+            );
+            
+            populateStudentCards(filteredStudents);
+        });
+
+        // Initialize with data from data.js
+        const students = studentData;
+        populateStudentCards(students);
+
+        // Real-time search
+        searchInput.addEventListener('input', () => {
+            const searchTerm = searchInput.value.toLowerCase().trim();
+            
+            if (searchTerm === '') {
+                populateStudentCards(students);
+                return;
+            }
+            
+            const filteredStudents = students.filter(student => 
+                student.name.toLowerCase().includes(searchTerm) || 
+                student.indexNumber.toLowerCase().includes(searchTerm)
+            );
+            
+            populateStudentCards(filteredStudents);
+        });
+
+        // Modal functionality
+        const modal = document.getElementById('student-modal');
+        const closeModalBtn = document.querySelector('.close-modal');
+
+        // Close modal when clicking on X
+        closeModalBtn.addEventListener('click', closeModal);
+
+        // Close modal when clicking outside
+        window.addEventListener('click', (event) => {
+            if (event.target === modal) {
+                closeModal();
+            }
+        });
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape' && modal.style.display === 'block') {
+                closeModal();
+            }
+        });
+
+        function openStudentModal(student) {
+            // Populate modal with student data
+            document.getElementById('modal-student-name').textContent = student.name;
+            document.getElementById('modal-student-image').src = student.image;
+            
+            // Student Information
+            document.getElementById('modal-student-id').textContent = student.id || 'Not specified';
+            document.getElementById('modal-student-name-display').textContent = student.name || 'Not specified';
+            document.getElementById('modal-student-number').textContent = student.indexNumber || 'Not specified';
+            document.getElementById('modal-phone').textContent = student.phone || 'Not specified';
+            
+            // Academic Details
+            document.getElementById('modal-year').textContent = student.year ? `Year ${student.year}` : 'Not specified';
+            document.getElementById('modal-semester').textContent = student.semester || 'Not specified';
+            document.getElementById('modal-course').textContent = student.course || 'Not specified';
+            document.getElementById('modal-blood-type').textContent = student.bloodType || 'Not specified';
+            document.getElementById('modal-scholar-type').textContent = student.Government_type || 'Not specified';
+            
+            // Health & Contact
+            document.getElementById('modal-health-issue').textContent = student.Health_issue || 'None';
+            document.getElementById('modal-parent-phone').textContent = student.parentPhone || 'Not specified';
+            
+            // Show modal
+            modal.style.display = 'block';
+            document.body.style.overflow = 'hidden'; // Prevent background scrolling
+        }
+
+        function closeModal() {
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto'; // Restore scrolling
+        }
+
+        // Lightbox helpers
+        function openLightbox(src, alt) {
+            lbImg.src = src;
+            lbImg.alt = alt || 'Full view';
+            lbOverlay.classList.add('active');
+            lbOverlay.setAttribute('aria-hidden', 'false');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            lbOverlay.classList.remove('active');
+            lbOverlay.setAttribute('aria-hidden', 'true');
+            lbImg.src = '';
+            document.body.style.overflow = '';
+        }
+
+        function attachLightboxListeners() {
+            document.querySelectorAll('.student-image img').forEach(function(img) {
+                img.style.cursor = 'zoom-in';
+                img.onclick = function(e) {
+                    e.stopPropagation();
+                    openLightbox(img.getAttribute('src'), img.getAttribute('alt'));
+                };
+            });
+            // Also allow clicking the image in the details modal
+            var modalImg = document.getElementById('modal-student-image');
+            if (modalImg) {
+                modalImg.style.cursor = 'zoom-in';
+                modalImg.onclick = function() {
+                    openLightbox(modalImg.getAttribute('src'), modalImg.getAttribute('alt'));
+                };
+            }
+        }
+
+        // Overlay close interactions
+        lbOverlay.addEventListener('click', function(e) {
+            if (e.target === lbOverlay) {
+                closeLightbox();
+            }
+        });
+        lbClose.addEventListener('click', closeLightbox);
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeLightbox();
+            }
+        });
+
+
+    </script>
+</body>
+</html>
